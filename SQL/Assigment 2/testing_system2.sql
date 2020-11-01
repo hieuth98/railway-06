@@ -63,7 +63,7 @@ CREATE TABLE answer(
     answers					TINYINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     content					NVARCHAR(100) NOT NULL,
     questionID				TINYINT UNSIGNED NOT NULL,
-    is_correct				BIT DEFAULT 1,
+    is_correct				ENUM('True','False'),
     FOREIGN KEY(question_id) REFERENCES question(question_id)
 );
 
