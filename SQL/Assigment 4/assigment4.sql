@@ -30,10 +30,16 @@ FROM question
 RIGHT JOIN category_question USING (category_id)
 GROUP BY category_id
 -- Q7: thống kê mỗi question được sử dụng trong bao nhiêu exam
-SELECT COUNT(*), question_id,`code`,exam_id, content
-FROM question
-LEFT JOIN exam USING (category_id)
-GROUP BY question_id
+SELECT GROUP_CONCAT(xamID), QuestionID,COUNT(1),Content
+FROM ExamQuestion
+JOIN Question USING(QuestionID)
+GROUP BY QuestionID
+HAVING COUNT(1) = (
+SELECT COUNT(1)
+FROM ExamQuestion
+GROUP BY QuestionID
+ORDER BY COUNT(1) DESC
+LIMIT 1
 -- Q8: lấy ra question có nhiều câu trả lời nhất
 SELECT COUNT(*),a.question_id,a.content
 FROM question q
@@ -42,18 +48,22 @@ GROUP BY a.question_id
 ORDER BY COUNT(*) DESC
 LIMIT 1
 -- Q9: thống kê số lượng account trong mỗi group
-SELECT COUNT(*), group_id, group_name
+
+SELECT COUNT(account_id), group_id, group_name
 FROM group_account
-JOIN `group` USING (group_id)
+RIGHT JOIN `group` USING (group_id)
 GROUP BY group_id
+
+
+
+
 -- Q10: tìm chức vụ có ít người nhất
-SELECT COUNT(*), department_name
-FROM department
-JOIN `account` USING (department_id)
-GROUP BY department_name
-ORDER BY COUNT(*) ASC
-LIMIT 1
--- Q11: thống kê mỗi phòng ban có bao nhiêu dev, test, scrum master, PM
+SELECT *, COUNT(1)
+FROM `account`
+GROUP BY position_id
+HAVING COUNT(1)=2
+
+-- Q11: thống kê mỗi phòng ban có bao nhiêu nhân viên thuộc 4 chức vụ (dev, test, scrum master, PM)
 SELECT COUNT(*), d.department_name,p.position_name 
 FROM `account` a
 JOIN department d ON d.department_id = a.department_id
