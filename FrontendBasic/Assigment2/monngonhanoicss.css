@@ -1,0 +1,44 @@
+table,
+th,
+td {
+    border: 1px solid palevioletred;
+    border-collapse: collapse;
+}
+
+th {
+    padding: 10px;
+    text-align: center;
+}
+
+td {
+    padding: 10px;
+    text-align: left;
+}
+
+table#t01 tr:nth-child(even) {
+    background-color: white;
+    color: rgb(3, 3, 49);
+}
+
+table#t01 tr:nth-child(odd) {
+    background-color: rgb(237, 187, 160);
+}
+
+table#t01 th {
+    background-color: brown;
+    color: white;
+}
+
+.row {
+    display: -webkit-flex;
+    display: flex;
+}
+
+.column {
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    padding: 10px;
+    height: 300px;
+    /* Should be removed. Only for demonstration */
+}

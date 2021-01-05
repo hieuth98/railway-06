@@ -1,0 +1,13 @@
+table,
+th,
+td {
+    border: 1px solid;
+    border-collapse: collapse;
+    padding: 5px;
+    background-color: rgb(181, 245, 86);
+}
+
+th {
+    color: green;
+    text-align: left;
+}
